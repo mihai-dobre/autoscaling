@@ -1,0 +1,6 @@
+-r base.txt
+pytest==4.6.2
+pytest-cov==2.7.1
+pytest-mock==1.10.4
+pytest-xdist==1.29.0
+responses==0.10.6
