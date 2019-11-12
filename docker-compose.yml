@@ -11,21 +11,13 @@ services:
       - BROKER_URL=redis://:redispass@redis:6379/0
     expose:
       - 6000
+    ports:
+      - "6000:6000"
     volumes:
       - .:/app
     depends_on:
       - redis
     entrypoint: ./boot.sh
-
-  nginx:
-    build:
-      context: ./docker/nginx
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - 8000:8000
-    depends_on:
-      - web
 
   redis:
     image: 'redis:5.0.5'
@@ -49,15 +41,3 @@ services:
       - redis
     depends_on:
       - redis
-
-  flower:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
-    depends_on:
-      - redis
-    ports:
-      - "5555:5555"
-    entrypoint: celery
-    command: flower --broker=redis://:redispass@redis:6379//

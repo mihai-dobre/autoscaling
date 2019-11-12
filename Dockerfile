@@ -15,7 +15,6 @@ RUN pip install --no-cache-dir -r requirements/test.txt
 
 # copy files from local filesystem into container
 COPY src src
-COPY tests tests
 COPY boot.sh boot.sh
 RUN chmod +x boot.sh
 

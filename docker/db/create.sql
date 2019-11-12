@@ -1,3 +1,0 @@
-CREATE DATABASE pds_prod;
-CREATE DATABASE pds_dev;
-CREATE DATABASE pds_test;
