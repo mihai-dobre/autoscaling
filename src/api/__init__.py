@@ -1,11 +1,4 @@
 from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-
-# instantiate the extensions
-db = SQLAlchemy()
-migrate = Migrate()
 
 
 def create_app(env=None):
@@ -19,21 +12,10 @@ def create_app(env=None):
 
     app.config.from_object(config_by_name[env or "test"])
 
-    # set up extensions
-    db.init_app(app)
-    migrate.init_app(app, db)
-
     # register blueprints
     from src.api.routes import bp as api_bp
 
     app.register_blueprint(api_bp)
-
-    # shell context for flask cli
-    @app.shell_context_processor
-    def make_shell_context():
-        from src.models import PDSJob
-
-        return {"db": db, "PDSJob": PDSJob}
 
     # health check end point
     @app.route("/health")
